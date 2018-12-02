@@ -1,3 +1,4 @@
+#include <cstring>
 #include "Database.h"
 
 Database::Database(char *infile, int buf_sz)

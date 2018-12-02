@@ -8,6 +8,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <cmath>
+#include <cstring>
 #include "../funcs.h"
 
 using namespace std;

@@ -6,6 +6,7 @@
 #include <err.h>
 #include <cstdlib>
 #include <cstdio>
+#include <cstring> 
 #include "utils.h"
 #include "StringArgvParser.h"
 

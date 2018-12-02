@@ -2,7 +2,8 @@
 #define UTILS_H
 
 #include <sstream>
-using namespace std;
+using std::ostringstream;
+using std::string;
 
 #ifndef bzero
 #define bzero(b,len) (memset((b), '\0', (len)), (void) 0)

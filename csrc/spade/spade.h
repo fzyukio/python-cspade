@@ -7,7 +7,7 @@
 
 using namespace std;
 
-#define min(a, b) ((a) < (b) ? (a) : (b))
+#define min(a, b) a < b ? a : b
 
 
 #define NONMAXFLG -2

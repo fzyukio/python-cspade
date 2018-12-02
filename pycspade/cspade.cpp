@@ -1643,13 +1643,14 @@ static PyObject *__pyx_pf_8pycspade_6cspade_6c_spade(CYTHON_UNUSED PyObject *__p
  * 
  * 
  * def c_get_result(decode=False):             # <<<<<<<<<<<<<<
- *     cdef result = getResult()
- * 
+ *     """
+ *     :param decode: if True, the return strings will be decoded and line-separated, otherwise raw C++ strings
  */
 
 /* Python wrapper */
 static PyObject *__pyx_pw_8pycspade_6cspade_9c_get_result(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_mdef_8pycspade_6cspade_9c_get_result = {"c_get_result", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_8pycspade_6cspade_9c_get_result, METH_VARARGS|METH_KEYWORDS, 0};
+static char __pyx_doc_8pycspade_6cspade_8c_get_result[] = "\n    :param decode: if True, the return strings will be decoded and line-separated, otherwise raw C++ strings\n                   (python bytes) are returned\n    ";
+static PyMethodDef __pyx_mdef_8pycspade_6cspade_9c_get_result = {"c_get_result", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_8pycspade_6cspade_9c_get_result, METH_VARARGS|METH_KEYWORDS, __pyx_doc_8pycspade_6cspade_8c_get_result};
 static PyObject *__pyx_pw_8pycspade_6cspade_9c_get_result(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_decode = 0;
   PyObject *__pyx_r = 0;
@@ -1715,38 +1716,38 @@ static PyObject *__pyx_pf_8pycspade_6cspade_8c_get_result(CYTHON_UNUSED PyObject
   PyObject *__pyx_t_5 = NULL;
   __Pyx_RefNannySetupContext("c_get_result", 0);
 
-  /* "pycspade/cspade.pyx":43
- * 
- * def c_get_result(decode=False):
+  /* "pycspade/cspade.pyx":47
+ *                    (python bytes) are returned
+ *     """
  *     cdef result = getResult()             # <<<<<<<<<<<<<<
  * 
  *     if decode:
  */
-  __pyx_t_1 = __pyx_convert__to_py_struct__result_t(getResult()); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 43, __pyx_L1_error)
+  __pyx_t_1 = __pyx_convert__to_py_struct__result_t(getResult()); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_result = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "pycspade/cspade.pyx":45
+  /* "pycspade/cspade.pyx":49
  *     cdef result = getResult()
  * 
  *     if decode:             # <<<<<<<<<<<<<<
  *         result['mined'] = result['mined'].decode('latin-1').split('\n')
  *         result['logger'] = result['logger'].decode('latin-1').split('\n')
  */
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_v_decode); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 45, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_v_decode); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 49, __pyx_L1_error)
   if (__pyx_t_2) {
 
-    /* "pycspade/cspade.pyx":46
+    /* "pycspade/cspade.pyx":50
  * 
  *     if decode:
  *         result['mined'] = result['mined'].decode('latin-1').split('\n')             # <<<<<<<<<<<<<<
  *         result['logger'] = result['logger'].decode('latin-1').split('\n')
  *         result['memlog'] = result['memlog'].decode('latin-1').split('\n')
  */
-    __pyx_t_4 = __Pyx_PyObject_Dict_GetItem(__pyx_v_result, __pyx_n_s_mined); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 46, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_Dict_GetItem(__pyx_v_result, __pyx_n_s_mined); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 50, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_decode); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 46, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_decode); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 50, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_t_4 = NULL;
@@ -1761,10 +1762,10 @@ static PyObject *__pyx_pf_8pycspade_6cspade_8c_get_result(CYTHON_UNUSED PyObject
     }
     __pyx_t_3 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_5, __pyx_t_4, __pyx_kp_s_latin_1) : __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_kp_s_latin_1);
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 46, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 50, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_split); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 46, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_split); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 50, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_t_3 = NULL;
@@ -1779,22 +1780,22 @@ static PyObject *__pyx_pf_8pycspade_6cspade_8c_get_result(CYTHON_UNUSED PyObject
     }
     __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_5, __pyx_t_3, __pyx_kp_s_) : __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_kp_s_);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 46, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 50, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(PyObject_SetItem(__pyx_v_result, __pyx_n_s_mined, __pyx_t_1) < 0)) __PYX_ERR(0, 46, __pyx_L1_error)
+    if (unlikely(PyObject_SetItem(__pyx_v_result, __pyx_n_s_mined, __pyx_t_1) < 0)) __PYX_ERR(0, 50, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "pycspade/cspade.pyx":47
+    /* "pycspade/cspade.pyx":51
  *     if decode:
  *         result['mined'] = result['mined'].decode('latin-1').split('\n')
  *         result['logger'] = result['logger'].decode('latin-1').split('\n')             # <<<<<<<<<<<<<<
  *         result['memlog'] = result['memlog'].decode('latin-1').split('\n')
  * 
  */
-    __pyx_t_3 = __Pyx_PyObject_Dict_GetItem(__pyx_v_result, __pyx_n_s_logger); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 47, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Dict_GetItem(__pyx_v_result, __pyx_n_s_logger); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 51, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_decode); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 47, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_decode); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 51, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_t_3 = NULL;
@@ -1809,10 +1810,10 @@ static PyObject *__pyx_pf_8pycspade_6cspade_8c_get_result(CYTHON_UNUSED PyObject
     }
     __pyx_t_5 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_3, __pyx_kp_s_latin_1) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_kp_s_latin_1);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 47, __pyx_L1_error)
+    if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 51, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_split); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 47, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_split); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 51, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __pyx_t_5 = NULL;
@@ -1827,22 +1828,22 @@ static PyObject *__pyx_pf_8pycspade_6cspade_8c_get_result(CYTHON_UNUSED PyObject
     }
     __pyx_t_1 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_5, __pyx_kp_s_) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_kp_s_);
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 47, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 51, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(PyObject_SetItem(__pyx_v_result, __pyx_n_s_logger, __pyx_t_1) < 0)) __PYX_ERR(0, 47, __pyx_L1_error)
+    if (unlikely(PyObject_SetItem(__pyx_v_result, __pyx_n_s_logger, __pyx_t_1) < 0)) __PYX_ERR(0, 51, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "pycspade/cspade.pyx":48
+    /* "pycspade/cspade.pyx":52
  *         result['mined'] = result['mined'].decode('latin-1').split('\n')
  *         result['logger'] = result['logger'].decode('latin-1').split('\n')
  *         result['memlog'] = result['memlog'].decode('latin-1').split('\n')             # <<<<<<<<<<<<<<
  * 
  *     return result
  */
-    __pyx_t_5 = __Pyx_PyObject_Dict_GetItem(__pyx_v_result, __pyx_n_s_memlog); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 48, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_Dict_GetItem(__pyx_v_result, __pyx_n_s_memlog); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 52, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_decode); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 48, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_decode); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 52, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __pyx_t_5 = NULL;
@@ -1857,10 +1858,10 @@ static PyObject *__pyx_pf_8pycspade_6cspade_8c_get_result(CYTHON_UNUSED PyObject
     }
     __pyx_t_4 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_5, __pyx_kp_s_latin_1) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_kp_s_latin_1);
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 48, __pyx_L1_error)
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 52, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_split); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 48, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_split); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 52, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_t_4 = NULL;
@@ -1875,13 +1876,13 @@ static PyObject *__pyx_pf_8pycspade_6cspade_8c_get_result(CYTHON_UNUSED PyObject
     }
     __pyx_t_1 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_4, __pyx_kp_s_) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_kp_s_);
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 48, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 52, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(PyObject_SetItem(__pyx_v_result, __pyx_n_s_memlog, __pyx_t_1) < 0)) __PYX_ERR(0, 48, __pyx_L1_error)
+    if (unlikely(PyObject_SetItem(__pyx_v_result, __pyx_n_s_memlog, __pyx_t_1) < 0)) __PYX_ERR(0, 52, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "pycspade/cspade.pyx":45
+    /* "pycspade/cspade.pyx":49
  *     cdef result = getResult()
  * 
  *     if decode:             # <<<<<<<<<<<<<<
@@ -1890,7 +1891,7 @@ static PyObject *__pyx_pf_8pycspade_6cspade_8c_get_result(CYTHON_UNUSED PyObject
  */
   }
 
-  /* "pycspade/cspade.pyx":50
+  /* "pycspade/cspade.pyx":54
  *         result['memlog'] = result['memlog'].decode('latin-1').split('\n')
  * 
  *     return result             # <<<<<<<<<<<<<<
@@ -1904,8 +1905,8 @@ static PyObject *__pyx_pf_8pycspade_6cspade_8c_get_result(CYTHON_UNUSED PyObject
  * 
  * 
  * def c_get_result(decode=False):             # <<<<<<<<<<<<<<
- *     cdef result = getResult()
- * 
+ *     """
+ *     :param decode: if True, the return strings will be decoded and line-separated, otherwise raw C++ strings
  */
 
   /* function exit code */
@@ -2345,8 +2346,8 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * 
  * 
  * def c_get_result(decode=False):             # <<<<<<<<<<<<<<
- *     cdef result = getResult()
- * 
+ *     """
+ *     :param decode: if True, the return strings will be decoded and line-separated, otherwise raw C++ strings
  */
   __pyx_tuple__10 = PyTuple_Pack(2, __pyx_n_s_decode, __pyx_n_s_result); if (unlikely(!__pyx_tuple__10)) __PYX_ERR(0, 42, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__10);
@@ -2680,8 +2681,8 @@ if (!__Pyx_RefNanny) {
  * 
  * 
  * def c_get_result(decode=False):             # <<<<<<<<<<<<<<
- *     cdef result = getResult()
- * 
+ *     """
+ *     :param decode: if True, the return strings will be decoded and line-separated, otherwise raw C++ strings
  */
   __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_8pycspade_6cspade_9c_get_result, NULL, __pyx_n_s_pycspade_cspade); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 42, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);

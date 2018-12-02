@@ -15,6 +15,7 @@
 #include <sys/mman.h>
 //#include <malloc.h>
 #include <cstring>
+#include "../utils.h"
 #include "Eqclass.h"
 #include "Itemset.h"
 #include "Lists.h"
@@ -23,7 +24,6 @@
 #include "spade.h"
 #include "maxgap.h"
 #include "../funcs.h"
-#include "../utils.h"
 
 using namespace std;
 

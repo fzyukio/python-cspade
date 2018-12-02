@@ -10,10 +10,10 @@
 #include <sys/mman.h>
 //#include <malloc.h>
 #include <cstring>
- 
+
+#include "../utils.h" 
 #include "extl2.h"
 #include "spade.h"
-#include "../utils.h"
 
 #define seqitcntbufsz 4086
 
