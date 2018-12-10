@@ -1,11 +1,7 @@
 import os
 import uuid
 
-import math
-
-from logging import warning
-
-from pycspade.cspade import c_exttpose, c_makebin, c_getconf, c_spade, c_get_result
+from pycspade.cspade import c_runspade
 
 
 def data_to_rows(data):
@@ -57,12 +53,11 @@ class Sequence:
         return '{} - [{}]'.format('->'.join(list(map(str, self.items))), self.noccurs)
 
 
-def decode_results(result):
+def parse_results(result):
     lifts = {}
     confidences = {}
     nseqs = result['nsequences']
-
-    mined = result['mined']
+    mined = result['seqstrm']
     lines = mined.strip().decode('latin-1').split('\n')
     lines.sort()
     sequences = {}
@@ -138,7 +133,7 @@ def spade(filename=None, data=None, support=0.1, maxsize=None, maxlen=None, ming
         if not isinstance(numpart, int):
             raise Exception('numpart must be integer')
 
-    assert (0 < support < 1), 'support must be a floating point in range (0-1]'
+    assert (0 < support <= 1), 'support must be a floating point in range (0-1]'
     
     if mingap is not None:
         assert mingap > 0, 'mingap cannot be 0 - that would mean two transactions happen at the same time'
@@ -146,68 +141,22 @@ def spade(filename=None, data=None, support=0.1, maxsize=None, maxlen=None, ming
         assert maxgap > 0, 'maxgap cannot be 0'
         if mingap and maxgap < mingap:
             mingap = maxgap
-    
-    hex = uuid.uuid4().hex
 
     if data:
         rows = data_to_rows(data)
-        nrows = len(rows)
+        hex = uuid.uuid4().hex
         filename = '/tmp/cspade-{}.txt'.format(hex)
         with open(filename, 'w', encoding='latin-1') as f:
             for row in rows:
                 f.write(row)
                 f.write('\n')
-    else:
-        nrows = file_len(filename)
-
-    opt = ''
-    nop = math.ceil((nrows + 2 * nrows) * 8 / math.pow(4, 10) / 5)
-    if memsize:
-        opt += '-m {}'.format(memsize)
-        nop = math.ceil(nop * 32 / memsize)
-
-    if numpart:
-        if numpart < nop:
-            warning('numpart less than recommended')
-        nop = numpart
-
-    datafile = '/tmp/cspade-{}.data'.format(hex)
-    otherfile = '/tmp/cspade-{}'.format(hex)
-    makebin_args = '{} {}'.format(filename, datafile)
-    getconf_args = '-i {} -o {}'.format(otherfile, otherfile)
-    exttpose_args = '-i {} -o {} -p 1 {} -l -x -s {}'.format(otherfile, otherfile, opt, support)
-
-    if maxsize:
-        opt += ' -Z {}'.format(maxsize)
-    if maxlen:
-        opt += ' -z {}'.format(maxlen)
-    if mingap:
-        opt += ' -l {}'.format(mingap)
-    if maxgap:
-        opt += ' -u {}'.format(maxgap)
-    if maxwin:
-        opt += ' -w {}'.format(maxwin)
-    if bfstype is None:
-        opt += ' -r'
-    if tid_lists:
-        opt += ' -y'
-
-    spade_args = '-i {} -s {} {} -e {} -o'.format(otherfile, support, opt, nop)
 
     try:
-        c_makebin(makebin_args)
-        c_getconf(getconf_args)
-        c_exttpose(exttpose_args)
-        c_spade(spade_args)
-        result = c_get_result(decode=False)
-        decode_results(result)
-
+        result = c_runspade(filename, support, maxsize, maxlen, mingap, maxgap, memsize, numpart, maxwin, bfstype,
+                            tid_lists)
+        parse_results(result)
         return result
 
-    except Exception as e:
-        raise RuntimeError(str(e))
-
     finally:
-        for file in os.listdir('/tmp'):
-            if file.startswith('cspade-{}'.format(hex)):
-                os.remove('/tmp/{}'.format(file))
+        if data:
+            os.remove(filename)

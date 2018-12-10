@@ -23,7 +23,7 @@ def print_result(result):
 
 
 if __name__ == '__main__':
-    result = spade(filename='tests/zaki.txt', support=0.3, maxgap=2)
+    result = spade(filename='tests/bb-tmi.txt', support=0.005, maxsize=10, maxlen=10, maxgap=1)
     print_result(result)
 
     # data = [

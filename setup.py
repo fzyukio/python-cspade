@@ -14,25 +14,25 @@ else:
     sourcefiles = ['pycspade/cspade.cpp']
 
 extra_files = ['csrc/{}'.format(x) for x in [
-    'StringArgvParser.cc',
-    'exttpose/Array.cc',
-    'spade/ArraySpade.cc',
-    'spade/Database.cc',
-    'spade/Eqclass.cc',
-    'spade/extl2.cc',
-    'spade/HashTable.cc',
-    'spade/Itemset.cc',
-    'spade/Lists.cc',
-    'spade/maxgap.cc',
-    'spade/partition.cc',
-    'spade/sequence.cc',
-    'exttpose/exttpose.cc',
-    'makebin/makebin.cc',
-    'getconf/getconf.cc',
-    'getconf/calcdb.cc',
-    'exttpose/calcdb.cc',
+    'makebin.cc',
+    'getconf.cc',
+    'exttpose.cc',
     'wrappers.cc',
-    'utils.cc'
+    'calcdb.cc',
+    'TransArray.cc',
+    'Array.cc',
+    'Itemset.cc',
+    'Lists.cc',
+    'Eqclass.cc',
+    'InvertDatabase.cc',
+    'Partition.cc',
+    'Sequence.cc',
+    'common.cc',
+    'argv_parser.cc',
+    'SpadeArguments.cc',
+    'FreqIt.cc',
+    'EqGrNode.cc',
+    'ClassInfo.cc'
 ]]
 
 ext_modules = [
@@ -41,13 +41,14 @@ ext_modules = [
               include_dirs=['csrc/'],
               language='c++',
               extra_compile_args=[
-                  '-std=c++03',
+                  '-std=c++11',
                   '-Wno-sign-compare',
                   '-Wno-incompatible-pointer-types',
                   '-Wno-unused-variable',
                   '-Wno-absolute-value',
                   '-Wno-visibility',
-                  '-Wno-#warnings']
+                  '-Wno-#warnings',
+              ]
               ),
 ]
 
@@ -60,7 +61,7 @@ setup(
     ext_modules=ext_modules,
     license='MIT',
     packages=['pycspade'],
-    version='0.4',
+    version='0.5.0',
     author=['Mohammed J. Zaki', 'Yukio Fukuzawa'],
     description='C-SPADE Python Implementation',
     long_description=long_description,
