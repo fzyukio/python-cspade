@@ -61,7 +61,7 @@ setup(
     ext_modules=ext_modules,
     license='MIT',
     packages=['pycspade'],
-    version='0.5.0',
+    version='0.5.2',
     author=['Mohammed J. Zaki', 'Yukio Fukuzawa'],
     description='C-SPADE Python Implementation',
     long_description=long_description,

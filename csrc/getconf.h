@@ -13,41 +13,21 @@ class GetconfArgument {
 public:
     string input;       //input file name
     string confn;
-    int use_seq = 1;
+    bool use_seq = true;
 
     void parse_args(int argc, char **argv) {
-//        extern char *optarg;
-        int c;
-        optind = 1;
+        auto cmdl = argh::parser(argc, argv, argh::parser::PREFER_PARAM_FOR_UNREG_OPTION);
+        cmdl("i") >> input;
+        cmdl("o") >> confn;
+        cmdl("a") >> use_seq;
 
-        if (argc < 2) {
+        if (input.empty() || confn.empty()) {
             cerr << "usage: getconf [-a] -i<infile> -o<outfile>\n";
-            exit(EXIT_FAILURE);
-        } else {
-            while ((c = getopt(argc, argv, "ai:o:")) != -1) {
-                switch (c) {
-                    case 'a': //work on assoc
-                        use_seq = 0;
-                        printf("USE SEQ = 0\n");
-                        break;
-                    case 'i':
-                        input = string(optarg) + ".data";
-                        break;
-                    case 'o':
-                        confn = string(optarg) + ".conf";
-                        break;
-                    case '?':
-                    default:
-                        ostringstream message;
-                        message << "Illegal option: " << char(optopt) << ". Full argv: \"";
-                        for (int i = 0; i < argc - 1; i++) {
-                            message << argv[i] << ' ';
-                        }
-                        message << argv[argc - 1] << '\"';
-                        throw runtime_error(message.str());
-                }
-            }
+            throw runtime_error("getconf needs valid value of -i and -o");
         }
+
+        input += ".data";
+        confn += ".conf";
     }
 };
 

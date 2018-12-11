@@ -42,70 +42,38 @@ public:
     int DBASE_TOT_TRANS; //tot trans for sequences
 
     long AMEM = 32 * MEG;
-
-    double tpose_time, offt_time, l2time;
-
+    
+    string name;
     void parse_args(int argc, char **argv) {
-        optind = 1;
-        int c;
-
-        if (argc < 2) {
-            cerr << "usage: exttpose [OPTION]... -i<infile> -o<outfile>\n";
-            exit(EXIT_FAILURE);
-        } else {
-            while ((c = getopt(argc, argv, "i:o:p:s:a:dvlfm:x")) != -1) {
-                switch (c) {
-                    case 'i': //input files
-                        input = string(optarg) + ".data";
-                        inconfn = string(optarg) + ".conf";
-                        break;
-                    case 'o': //output file names
-                        output = string(optarg) + ".tpose";
-                        idxfn = string(optarg) + ".idx";
-                        it2fn = string(optarg) + ".2it";
-                        seqfn = string(optarg) + ".2seq";
-                        tmpfn = string(optarg) + ".tmp";
-                        break;
-                    case 'p': //number of partitions for inverted dbase
-                        num_partitions = atoi(optarg);
-                        break;
-                    case 's': //support value for L2
-                        MINSUP_PER = atof(optarg);
-                        break;
-                    case 'a': //turn off 2-SEQ calclation
-                        use_seq = 0;
-                        write_only_fcnt = atoi(optarg);
-                        break;
-                    case 'd': //output diff lists, i.e. U - tidlist, only with assoc
-                        use_diff = 1;
-                        break;
-                    case 'l': //turn off L2 calculation
-                        do_l2 = 0;
-                        break;
-                    case 'v': //turn of dbase inversion
-                        do_invert = 0;
-                        break;
-                    case 'f':
-                        use_newformat = 0;
-                        break;
-                    case 'm':
-                        AMEM = atoi(optarg) * MEG;
-                        break;
-                    case 'x':
-                        no_minus_off = 1;
-                        break;
-                    case '?':
-                    default:
-                        ostringstream message;
-                        message << "Illegal option: " << char(optopt) << ". Full argv: \"";
-                        for (int i = 0; i < argc - 1; i++) {
-                            message << argv[i] << ' ';
-                        }
-                        message << argv[argc - 1] << '\"';
-                        throw runtime_error(message.str());
-                }
-            }
+        auto cmdl = argh::parser(argc, argv, argh::parser::PREFER_PARAM_FOR_UNREG_OPTION);
+        if (!cmdl({"s", "i", "o"})) {
+            cerr << "usage: exttpose [OPTION]... -i<infile> -o<outfile> -s\n";
+            throw runtime_error("exttpose needs valid value of -i -o and -s");
         }
+        cmdl("i") >> name;
+        input = name + ".data";
+        inconfn = name + ".conf";
+        cmdl("o") >> name;
+        output = name + ".tpose";
+        idxfn = name + ".idx";
+        it2fn = name + ".2it";
+        seqfn = name + ".2seq";
+        tmpfn = name + ".tmp";
+        cmdl("p") >> num_partitions;
+        cmdl("s") >> MINSUP_PER;
+        if (cmdl("a")) {
+            use_seq = 0;
+            cmdl("a") >> write_only_fcnt;
+        }
+        if (cmdl["d"]) use_diff = 1;
+        if (cmdl["l"]) do_l2 = 0;
+        if (cmdl["v"]) do_invert = 0;
+        if (cmdl["f"]) use_newformat = 0;
+        if (cmdl("m")) {
+            cmdl("m") >> AMEM;
+            AMEM *= MEG;
+        }
+        if (cmdl["x"]) no_minus_off = 1;
 
         ifstream inconff(inconfn, ios::binary);
         if (!inconff) {

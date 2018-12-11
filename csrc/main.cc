@@ -3,16 +3,24 @@
 
 
 int main(int argc, char** argv) {
-    if (argc != 2) {
-        cerr << "Usage: cpsde-full /path/to/file.txt" << endl;
-        return 1;
-    }
-    string filename(argv[1]);
+    string filename;
     spade_arg_t args;
-    args.maxgap = 1;
-    args.support = 0.01;
     args.maxsize = 10;
     args.maxlen = 10;
+    args.maxgap = 1;
+
+    auto cmdl = argh::parser(argc, argv, argh::parser::PREFER_PARAM_FOR_UNREG_OPTION);
+    cmdl({"-i", "--input"}) >> filename;
+
+    if (filename.empty() || !cmdl({"-s", "--support"})) {
+        cerr << "usage: cspade-full -i<infile> -s<support>\n";
+        throw runtime_error("cspade-full needs valid value of -i and -s");
+    }
+
+    cmdl({"-s", "--support"}) >> args.support;
+    if (cmdl({"-u", "--max-gap"})) cmdl({"-u", "--max-gap"}) >> args.maxgap;
+    if (cmdl({"-m", "--maxsize"})) cmdl({"-m", "--maxsize"}) >> args.maxsize;
+    if (cmdl({"-M", "--maxlen"})) cmdl({"-M", "--maxlen"})>> args.maxlen;
 
     result_t result = runSpade(filename, args);
     cout << result.seqstrm;

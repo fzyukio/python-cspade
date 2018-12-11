@@ -18,6 +18,7 @@
 #include <stdexcept>
 #include <memory>
 #include <algorithm>
+#include "argh.h"
 
 #ifndef INT_MAX
 #define INT_MAX 2147483647

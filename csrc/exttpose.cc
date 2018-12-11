@@ -539,9 +539,6 @@ result_t exttposeFunc(Env &env, ExttposeArgument &args) {
     Exttpose exttpose(env, args);
     exttpose.tpose();
 
-    env.summary << args.tpose_time << " " << args.offt_time << " " << endl;
-    env.logger << "Total elapsed time " << endl;
-
     result_t result;
     result.logger = env.logger.str();
     result.summary = env.summary.str();
