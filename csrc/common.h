@@ -10,14 +10,23 @@
 #include <cerrno>
 #include <cstdio>
 #include <cstdlib>
-#include <fcntl.h>
 #include <sys/stat.h>
-#include <unistd.h>
 #include <cmath>
 #include <exception>
 #include <stdexcept>
 #include <memory>
 #include <algorithm>
+#if defined(WIN32) || defined(MS_WINDOWS)
+#include <io.h>
+#include <fcntl.h>
+#include "dirent-win.h"
+#else
+#include <fcntl.h>
+#include <unistd.h>
+#include <dirent.h>
+#endif
+#include <sys/types.h>
+#include <sys/stat.h>
 #include "argh.h"
 
 #ifndef INT_MAX
@@ -78,5 +87,9 @@ int num_lines(const string &filename);
 list<string> list_files(const string& folder, const string& prefix = "");
 
 string random_id(const int len);
+
+string get_temp_folder();
+
+extern const string TMPDIR;
 
 #endif

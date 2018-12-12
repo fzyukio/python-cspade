@@ -1,7 +1,4 @@
-#include <sys/types.h>
-#include <unistd.h>
-#include <errno.h>
-
+#include "common.h"
 #include "Eqclass.h"
 
 Eqclass::Eqclass(int iset_sz, int eqt) {

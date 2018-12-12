@@ -38,7 +38,7 @@ result_t makebinFunc(Env& env, const string& infilename, const string& outfilena
 
     while (fin.getline(inBuf, lineSize)) {
         inSize = fin.gcount();
-        env.logger << "IN SIZE " << inSize << endl;
+//        env.logger << "IN SIZE " << inSize << endl;
         convbin(fout, inBuf, inSize);
     }
 

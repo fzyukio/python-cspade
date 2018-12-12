@@ -11,7 +11,6 @@
 #include "TransArray.h"
 #include "calcdb.h"
 
-typedef unsigned char CHAR;
 #define MEG (1024*1204)
 
 
@@ -114,13 +113,13 @@ class Exttpose {
     vector<int> freqidx;
     vector<int> backidx;
     vector<TransArray> extary;
-    vector<CHAR> seq2;
-    vector<CHAR> itcnt2;
+    vector<unsigned char> seq2;
+    vector<unsigned char> itcnt2;
     vector<char> ocust;
     vector<int> offsets;
     vector<int> fidx;
 public:
-    void sort_get_l2(int &l2cnt, fstream& file, ofstream &ofd, vector<CHAR> &cntary, bool use_seq);
+    void sort_get_l2(int &l2cnt, fstream& file, ofstream &ofd, vector<unsigned char> &cntary, bool use_seq);
 
     void process_cust(int fcnt, fstream &seqfd, fstream &isetfd);
 

@@ -17,7 +17,7 @@ int cmp2it(const void *a, const void *b) {
     }
 }
 
-void Exttpose::sort_get_l2(int &l2cnt, fstream &file, ofstream &ofd, vector<CHAR> &cntary, bool use_seq) {
+void Exttpose::sort_get_l2(int &l2cnt, fstream &file, ofstream &ofd, vector<unsigned char> &cntary, bool use_seq) {
     //write 2-itemsets counts to file
 
     int i, j, k;

@@ -84,7 +84,7 @@ public:
         lseek(fd, offset[pos] * sizeof(int), SEEK_SET);
         int wblk = theSize;
         if (wblk > 0) {
-            ssize_t res = ::write(fd, (char *) theArray.data(), wblk * sizeof(int));
+            auto res = write(fd, (char *) theArray.data(), wblk * sizeof(int));
             if (res < wblk * sizeof(int)) {
                 throw runtime_error("Error writing");
             }

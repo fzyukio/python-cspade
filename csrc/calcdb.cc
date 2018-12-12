@@ -22,7 +22,7 @@ DbaseCtrlBlk::~DbaseCtrlBlk() {
 
 void DbaseCtrlBlk::get_next_trans_ext() {
     // Need to get more items from file
-    ssize_t res = cur_blk_size - cur_buf_pos;
+    auto res = cur_blk_size - cur_buf_pos;
     if (res > 0) {
         // First copy partial transaction to beginning of buffer
         memcpy((void *) buf,

@@ -27,6 +27,6 @@ struct spade_arg_t {
  * @param tmpdir temporary folder for spade to operate. Temp files will be cleaned afterwards. Must end with a slash
  * @return same as getResult
  */
-result_t runSpade(const string& filename, spade_arg_t args, const string& tmpdir = "/tmp/");
+result_t runSpade(const string& filename, spade_arg_t args, const string& tmpdir = TMPDIR);
 
 #endif //SPADE_UTILITY_WRAPPERS_H

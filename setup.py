@@ -1,5 +1,7 @@
 from setuptools import setup, Extension
 from codecs import open
+import sys
+is_windows = sys.platform.startswith('win')
 
 try:
     from Cython.Distutils import build_ext
@@ -35,20 +37,26 @@ extra_files = ['csrc/{}'.format(x) for x in [
     'ClassInfo.cc'
 ]]
 
+if is_windows:
+    extra_compiler_args=[]
+else:
+    extra_compiler_args=[
+        '-std=c++11',
+        '-Wno-sign-compare',
+        '-Wno-incompatible-pointer-types',
+        '-Wno-unused-variable',
+        '-Wno-absolute-value',
+        '-Wno-visibility',
+        '-Wno-#warnings',
+    ]
+
+
 ext_modules = [
     Extension('pycspade.cspade',
               sourcefiles + extra_files,
               include_dirs=['csrc/'],
               language='c++',
-              extra_compile_args=[
-                  '-std=c++11',
-                  '-Wno-sign-compare',
-                  '-Wno-incompatible-pointer-types',
-                  '-Wno-unused-variable',
-                  '-Wno-absolute-value',
-                  '-Wno-visibility',
-                  '-Wno-#warnings',
-              ]
+              extra_compile_args=extra_compiler_args,
               ),
 ]
 

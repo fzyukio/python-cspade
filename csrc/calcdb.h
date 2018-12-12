@@ -12,7 +12,7 @@
 
 class DbaseCtrlBlk {
 public:
-    DbaseCtrlBlk(){}
+    DbaseCtrlBlk() = default;
 
     void init(const string& infilename, int buf_sz = DCBBUFSZ);
 
@@ -28,13 +28,13 @@ public:
         return (readall == 1);
     }
 
-    int fd{};
-    int buf_size{};
-    int *buf{};
-    ssize_t cur_blk_size{};
-    int cur_buf_pos{};
-    off_t endpos{};
-    char readall{};
+    int fd;
+    int buf_size;
+    int *buf;
+    unsigned long cur_blk_size;
+    int cur_buf_pos;
+    unsigned long endpos;
+    char readall;
 };
 
 #endif //__DATABASE_H

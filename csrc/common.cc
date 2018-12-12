@@ -1,4 +1,3 @@
-#include <dirent.h>
 #include <random>
 #include "common.h"
 
@@ -8,6 +7,8 @@ const int FLOAT_SIZE = sizeof(float);
 vuint vuint_null;
 const char alphanum[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 const int alphanumlen = sizeof(alphanum) - 1;
+
+const string TMPDIR = get_temp_folder();
 
 unsigned long file_size(fstream& file) {
     std::streampos fsize = 0;
@@ -93,4 +94,16 @@ string random_id(const int len) {
     string retval(s);
     delete [] s;
     return retval;
+}
+
+string get_temp_folder() {
+#if defined(WIN32) || defined(MS_WINDOWS)
+    string buffer;
+    buffer.resize(1000);
+    const auto new_size = GetTempPathA(buffer.size(), &buffer[0]); //deal with newsize == 0
+    buffer.resize(new_size);
+    return buffer;
+#else
+    return "/tmp/";
+#endif
 }
