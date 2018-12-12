@@ -16,7 +16,7 @@
 #include <stdexcept>
 #include <memory>
 #include <algorithm>
-#if defined(WIN32) || defined(MS_WINDOWS)
+#if defined(_MSC_VER) || defined(MS_WINDOWS) ||  defined(WIN32)
 #include <io.h>
 #include <fcntl.h>
 #include "dirent-win.h"
