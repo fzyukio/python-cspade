@@ -50,4 +50,4 @@ class Test(unittest.TestCase):
         self.assertDictEqual(self.lifts, correct_lifts)
         self.assertDictEqual(self.confids, correct_confids)
 
-        print(self.accum_occurs)
+        print((self.accum_occurs))

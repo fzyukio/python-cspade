@@ -38,5 +38,5 @@ def c_runspade(filename, support=0.1, maxsize=None, maxlen=None, mingap=None, ma
     args.bfstype = bfstype or False
     args.tid_lists = bfstype or False
 
-    filename = bytes(filename, encoding='ascii')
+    filename = filename.encode('latin-1')
     return runSpade(filename, args)

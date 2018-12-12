@@ -7,7 +7,8 @@ Original code was downloaded from http://www.cs.rpi.edu/~zaki/www-new/pmwiki.php
 Since this is just a wrapper it is as fast as the C++ code
 
 #### How to install?
-On Windows, Visual Studio 2015 Build Tools is required to compile.
+Compatible with Python 2 and 3. 
+On Windows, Visual Studio 2015 Build Tools is also required.
 
 ```bash
 pip install Cython pycspade

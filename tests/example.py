@@ -3,11 +3,12 @@ from pycspade.helpers import spade, print_result
 if __name__ == '__main__':
     result = spade(filename='tests/zaki.txt', support=0.3)
     print('Sequences mined:')
-    print(result['seqstrm'])
+    print((result['seqstrm']))
     print('Logger:')
-    print(result['logger'])
+    print((result['logger']))
     print('Summary:')
-    print(result['summary'])
+    print((result['summary']))
+
     print_result(result)
 
     # data = [

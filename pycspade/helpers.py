@@ -79,7 +79,7 @@ def parse_results(result):
             sequences[sequence_str] = sequence
 
     # Second pass
-    for sequence in sequences.values():
+    for sequence in list(sequences.values()):
         sequence.up_to_prev = up_to_prev = sequences.get(sequence.up_to_prev_str, None)
         sequence.last_child = last_child = sequences.get(sequence.last_child_str, None)
         sequence.frm_second = sequences.get(sequence.frm_second_str, None)
@@ -93,11 +93,11 @@ def parse_results(result):
                 lifts[sequence.name] = sequence.lift
 
     # Third pass - to calculate accummulated occurrence counts
-    for sequence in sequences.values():
+    for sequence in list(sequences.values()):
         if sequence.frm_second is not None:
             sequence.frm_second.accumulate_occurs(sequence.noccurs)
 
-    result['mined_objects'] = sequences.values()
+    result['mined_objects'] = list(sequences.values())
 
 
 def spade(filename=None, data=None, support=0.1, maxsize=None, maxlen=None, mingap=None, maxgap=None, memsize=None,
@@ -165,8 +165,8 @@ def spade(filename=None, data=None, support=0.1, maxsize=None, maxlen=None, ming
 
 def print_result(result):
     nseqs = result['nsequences']
-    print('{0:>9s} {1:>9s} {2:>9s} {3:>9s} {4:>9s} {5:>80s}'.format('Occurs', 'Accum', 'Support', 'Confid', 'Lift',
-                                                                    'Sequence'))
+    print(('{0:>9s} {1:>9s} {2:>9s} {3:>9s} {4:>9s} {5:>80s}'.format('Occurs', 'Accum', 'Support', 'Confid', 'Lift',
+                                                                    'Sequence')))
     for mined_object in result['mined_objects']:
         conf = 'N/A'
         lift = 'N/A'
@@ -175,13 +175,13 @@ def print_result(result):
         if mined_object.lift:
             lift = '{:0.7f}'.format(mined_object.lift)
 
-        print('{0:>9d} {1:>9d} {2:>0.7f} {3:>9s} {4:>9s} {5:>80s} '.format(
+        print(('{0:>9d} {1:>9d} {2:>0.7f} {3:>9s} {4:>9s} {5:>80s} '.format(
             mined_object.noccurs,
             mined_object.accum_occurs,
             mined_object.noccurs / nseqs,
             conf,
             lift,
-            '->'.join(list(map(str, mined_object.items)))))
+            '->'.join(list(map(str, mined_object.items))))))
 
 
 def decode_result(result):

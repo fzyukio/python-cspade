@@ -72,7 +72,7 @@ def decode_results(result):
             sequences[sequence_str] = sequence
 
     # Second pass
-    for sequence in sequences.values():
+    for sequence in list(sequences.values()):
         sequence.up_to_prev = up_to_prev = sequences.get(sequence.up_to_prev_str, None)
         sequence.last_child = last_child = sequences.get(sequence.last_child_str, None)
         sequence.frm_second = sequences.get(sequence.frm_second_str, None)
@@ -86,11 +86,11 @@ def decode_results(result):
                 lifts[sequence.name] = sequence.lift
 
     # Third pass - to calculate accummulated occurrence counts
-    for sequence in sequences.values():
+    for sequence in list(sequences.values()):
         if sequence.frm_second is not None:
             sequence.frm_second.accumulate_occurs(sequence.noccurs)
 
-    result['mined_objects'] = sequences.values()
+    result['mined_objects'] = list(sequences.values())
 
 
 def cspade(filename=None, data=None, support=3, maxsize=None, maxlen=None, mingap=None, maxgap=None):

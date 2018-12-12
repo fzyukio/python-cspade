@@ -1,6 +1,7 @@
 from setuptools import setup, Extension
 from codecs import open
 import sys
+
 is_windows = sys.platform.startswith('win')
 
 try:
@@ -38,9 +39,9 @@ extra_files = ['csrc/{}'.format(x) for x in [
 ]]
 
 if is_windows:
-    extra_compiler_args=[]
+    extra_compiler_args = []
 else:
-    extra_compiler_args=[
+    extra_compiler_args = [
         '-std=c++11',
         '-Wno-sign-compare',
         '-Wno-incompatible-pointer-types',
@@ -49,7 +50,6 @@ else:
         '-Wno-visibility',
         '-Wno-#warnings',
     ]
-
 
 ext_modules = [
     Extension('pycspade.cspade',
@@ -63,13 +63,12 @@ ext_modules = [
 with open('README.md', 'r') as fh:
     long_description = fh.read()
 
-setup(
+setup_args = dict(
     name='pycspade',
-    cmdclass={'build_ext': build_ext},
     ext_modules=ext_modules,
     license='MIT',
     packages=['pycspade'],
-    version='0.5.2',
+    version='0.6.1',
     author=['Mohammed J. Zaki', 'Yukio Fukuzawa'],
     description='C-SPADE Python Implementation',
     long_description=long_description,
@@ -77,5 +76,11 @@ setup(
     url='https://github.com/fzyukio/python-cspade',
     keywords=['cspade', 'c-spade', 'sequence mining'],
     install_requires=['Cython'],
+)
 
+if use_cython:
+    setup_args['cmdclass'] = {'build_ext': build_ext}
+
+setup(
+    **setup_args
 )
