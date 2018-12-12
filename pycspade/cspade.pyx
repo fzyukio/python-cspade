@@ -40,10 +40,3 @@ def c_runspade(filename, support=0.1, maxsize=None, maxlen=None, mingap=None, ma
 
     filename = bytes(filename, encoding='ascii')
     return runSpade(filename, args)
-
-
-def decode_result(result):
-    result['mined'] = result['seqstrm'].decode('latin-1').split('\n')
-    result['logger'] = result['logger'].decode('latin-1').split('\n')
-    result['memlog'] = result['memlog'].decode('latin-1').split('\n')
-    return

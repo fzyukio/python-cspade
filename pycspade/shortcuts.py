@@ -106,11 +106,10 @@ def cspade(filename=None, data=None, support=3, maxsize=None, maxlen=None, minga
     :param maxgap: an integer value specifying the maximum time difference between consecutive elements of a sequence
     :param decode: if True, the return strings will be decoded and line-separated, otherwise raw C++ strings
                    (python bytes) are returned
-    :return: (result, logger, summary, memlog). where:
+    :return: (result, logger, summary). where:
              -result: the mined sequences
              -logger: general logging
              -summary: equivalent to the content of summary.out
-             -memlog: logging of memory usage
     """
     if filename is None and data is None:
         raise Exception('You must provide either filename or data')

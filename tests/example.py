@@ -1,44 +1,27 @@
-from pycspade.helpers import spade
-
-
-def print_result(result):
-    nseqs = result['nsequences']
-    print('{0:>9s} {1:>9s} {2:>9s} {3:>9s} {4:>9s} {5:>80s}'.format('Occurs', 'Accum', 'Support', 'Confid', 'Lift',
-                                                                    'Sequence'))
-    for mined_object in result['mined_objects']:
-        conf = 'N/A'
-        lift = 'N/A'
-        if mined_object.confidence:
-            conf = '{:0.7f}'.format(mined_object.confidence)
-        if mined_object.lift:
-            lift = '{:0.7f}'.format(mined_object.lift)
-
-        print('{0:>9d} {1:>9d} {2:>0.7f} {3:>9s} {4:>9s} {5:>80s} '.format(
-            mined_object.noccurs,
-            mined_object.accum_occurs,
-            mined_object.noccurs / nseqs,
-            conf,
-            lift,
-            '->'.join(list(map(str, mined_object.items)))))
-
+from pycspade.helpers import spade, print_result
 
 if __name__ == '__main__':
-    result = spade(filename='tests/bb-tmi.txt', support=0.005, maxsize=10, maxlen=10, maxgap=1)
+    result = spade(filename='tests/zaki.txt', support=0.3)
+    print('Sequences mined:')
+    print(result['seqstrm'])
+    print('Logger:')
+    print(result['logger'])
+    print('Summary:')
+    print(result['summary'])
     print_result(result)
 
     # data = [
-    #     [1, 1, [1]],
-    #     [1, 2, [2]],
-    #     [1, 3, [3]],
-    #
-    #     [2, 1, [2]],
-    #     [2, 2, [3]],
-    #
-    #     [3, 1, [1]],
-    #     [3, 2, [3]],
-    #     [3, 3, [2]],
-    #     [3, 4, [3]],
+    #     [1, 10, [3, 4]],
+    #     [1, 15, [1, 2, 3]],
+    #     [1, 20, [1, 2, 6]],
+    #     [1, 25, [1, 3, 4, 6]],
+    #     [2, 15, [1, 2, 6]],
+    #     [2, 20, [5]],
+    #     [3, 10, [1, 2, 6]],
+    #     [4, 10, [4, 7, 8]],
+    #     [4, 20, [2, 6]],
+    #     [4, 25, [1, 7, 8]]
     # ]
     #
-    # result = spade(data=data, support=0.5)
+    # result = spade(data=data, support=0.3)
     # print_result(result)
