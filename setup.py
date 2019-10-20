@@ -1,8 +1,15 @@
 from setuptools import setup, Extension
 from codecs import open
 import sys
+import os
 
-is_windows = sys.platform.startswith('win')
+# is_windows = sys.platform.startswith('win')
+
+def is_platform_mac():
+    return sys.platform == 'darwin'
+
+def is_platform_windows():
+    return sys.platform == 'win32' or sys.platform == 'cygwin'
 
 try:
     from Cython.Distutils import build_ext
@@ -38,7 +45,21 @@ extra_files = ['csrc/{}'.format(x) for x in [
     'ClassInfo.cc'
 ]]
 
-if is_windows:
+
+# Fix compatibility when compiling on Mac Mojave.
+# Explanation: https://github.com/pandas-dev/pandas/issues/23424#issuecomment-446393981
+# Code credit: https://github.com/pandas-dev/pandas/pull/24274/commits/256faf2011a12424e684a42c147e1ba7ac32c6fb
+if is_platform_mac():
+    import _osx_support
+    import distutils.sysconfig
+    if not 'MACOSX_DEPLOYMENT_TARGET' in os.environ:
+        current_system = list(map(int, _osx_support._get_system_version().split('.')))
+        python_osx_target_str = distutils.sysconfig.get_config_var('MACOSX_DEPLOYMENT_TARGET')
+        python_osx_target = list(map(int, python_osx_target_str.split('.')))
+        if python_osx_target < [10, 9] and current_system >= [10, 9]:
+            os.environ['MACOSX_DEPLOYMENT_TARGET'] = '10.9'
+
+if is_platform_windows():
     extra_compiler_args = []
 else:
     extra_compiler_args = [
@@ -68,7 +89,7 @@ setup_args = dict(
     ext_modules=ext_modules,
     license='MIT',
     packages=['pycspade'],
-    version='0.6.1',
+    version='0.6.2',
     author=['Mohammed J. Zaki', 'Yukio Fukuzawa'],
     description='C-SPADE Python Implementation',
     long_description=long_description,
