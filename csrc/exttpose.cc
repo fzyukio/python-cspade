@@ -319,7 +319,6 @@ void Exttpose::tpose() {
         extary.emplace_back(extarysz, args.num_partitions);
     }
 
-    ostringstream tmpnamestrm;
     int plb, pub, pblk;
     pblk = static_cast<int>(ceil(((double) (maxcustid - mincustid + 1)) / args.num_partitions));
     if (args.do_invert) {
@@ -329,6 +328,7 @@ void Exttpose::tpose() {
         }
         for (j = 0; j < args.num_partitions; j++) {
             //construct offsets for 1-itemsets
+            ostringstream tmpnamestrm;
             tmpnamestrm << args.idxfn;
             if (args.num_partitions > 1) {
                 tmpnamestrm << ".P" << j;
