@@ -59,8 +59,12 @@ if is_platform_mac():
         if python_osx_target < [10, 9] and current_system >= [10, 9]:
             os.environ['MACOSX_DEPLOYMENT_TARGET'] = '10.9'
 
+    os.environ['CC'] = 'clang'
+    os.environ['CXX'] = 'clang'
+
 if is_platform_windows():
     extra_compiler_args = []
+
 else:
     extra_compiler_args = [
         '-std=c++11',
@@ -78,6 +82,7 @@ ext_modules = [
               include_dirs=['csrc/'],
               language='c++',
               extra_compile_args=extra_compiler_args,
+              extra_link_args=["-O2", "-march=native", '-stdlib=libc++'],
               ),
 ]
 
@@ -89,7 +94,7 @@ setup_args = dict(
     ext_modules=ext_modules,
     license='MIT',
     packages=['pycspade'],
-    version='0.6.4',
+    version='0.6.5',
     author=['Mohammed J. Zaki', 'Yukio Fukuzawa'],
     description='C-SPADE Python Implementation',
     long_description=long_description,
