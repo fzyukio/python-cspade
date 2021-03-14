@@ -64,7 +64,6 @@ if is_platform_mac():
 
 if is_platform_windows():
     extra_compiler_args = []
-
 else:
     extra_compiler_args = [
         '-std=c++11',
@@ -76,15 +75,25 @@ else:
         '-Wno-#warnings',
     ]
 
-ext_modules = [
-    Extension('pycspade.cspade',
-              sourcefiles + extra_files,
-              include_dirs=['csrc/'],
-              language='c++',
-              extra_compile_args=extra_compiler_args,
-              extra_link_args=["-O2", "-march=native", '-stdlib=libc++'],
-              ),
-]
+if is_platform_mac():
+    ext_modules = [
+        Extension('pycspade.cspade',
+                  sourcefiles + extra_files,
+                  include_dirs=['csrc/'],
+                  language='c++',
+                  extra_compile_args=extra_compiler_args,
+                  extra_link_args=["-O2", "-march=native", '-stdlib=libc++'],
+                  ),
+    ]
+else:
+    ext_modules = [
+        Extension('pycspade.cspade',
+                  sourcefiles + extra_files,
+                  include_dirs=['csrc/'],
+                  language='c++',
+                  extra_compile_args=extra_compiler_args,
+                  ),
+    ]
 
 with open('README.md', 'r') as fh:
     long_description = fh.read()
@@ -94,7 +103,7 @@ setup_args = dict(
     ext_modules=ext_modules,
     license='MIT',
     packages=['pycspade'],
-    version='0.6.5',
+    version='0.6.6',
     author=['Mohammed J. Zaki', 'Yukio Fukuzawa'],
     description='C-SPADE Python Implementation',
     long_description=long_description,
