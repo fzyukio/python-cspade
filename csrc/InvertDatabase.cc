@@ -318,7 +318,7 @@ void InvertDatabase::get_F2(int &l2cnt) {
     char use_seq;
 
     for (j = 0; j < numfreq; j++) {
-        if (set_sup[j].empty()) {
+        if (!set_sup[j].empty()) {
             use_seq = 0;
             for (k = j + 1; k < numfreq; k++) {
                 lflg = 0;
