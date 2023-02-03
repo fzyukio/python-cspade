@@ -34,21 +34,7 @@ from pycspade.helpers import spade, print_result
 
 # To get raw SPADE output
 result = spade(filename='tests/zaki.txt', support=0.3, parse=False)
-print(result['mined'])
-```
-```bash
-1 -- 4 4 
-2 -- 4 4 
-4 -- 2 2 
-6 -- 4 4 
-4 -> 6 -- 2 2 
-4 -> 2 -- 2 2 
-2 -> 1 -- 2 2 
-4 -> 1 -- 2 2 
-6 -> 1 -- 2 2 
-4 -> 6 -> 1 -- 2 2 
-4 -> 2 -> 1 -- 2 2
-```
+
 ```python
 print(result['logger'])
 ```
